@@ -11,7 +11,8 @@ RUN npm i -g yarn
 # Clone Repo
 RUN git clone https://github.com/alexfeed1990/Screenshare-selfbot
 WORKDIR Discord-Screenshare
-RUN yarn install
+# RUN yarn install
+RUN npm i
 COPY .env .
 
 # Install chrome 88
@@ -25,4 +26,5 @@ RUN mv chromedriver /bin
 RUN wget https://raw.githubusercontent.com/aiko-chan-ai/discord.js-selfbot-v13/3ec6bf45fba5cfcde4c70062302d68bfa5ef4cf6/src/managers/ClientUserSettingManager.js -O /Discord-Screenshare/node_modules/discord.js-selfbot-v13/src/managers/ClientUserSettingManager.js
 
 # Start Bot
-RUN yarn start
+# RUN yarn start
+RUN node .
