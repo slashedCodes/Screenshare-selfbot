@@ -1,0 +1,19 @@
+{
+  "name": "DiscordStream",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "bin": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js-selfbot-v13": "^2.2.0",
+    "dotenv": "^10.0.0",
+    "selenium-webdriver": "^4.0.0-beta.4",
+    "ytdl-core": "^4.11.0"
+  }
+}
