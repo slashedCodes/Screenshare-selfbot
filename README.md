@@ -1,6 +1,7 @@
 ## Discord ScreenShare Bot
 
 Updated version that im trying to get working.
+[original](https://github.com/MainSilent/Discord-Screenshare)
 
 ### Setup
 Create an `.env` file with the following content:
@@ -22,7 +23,7 @@ Join the selfbot user to your guild and type `*help`, If it respond your bot is 
 *(on windows install docker desktop and if u want to install ubuntu wsl and enable docker desktop integration in there from the app. Then run the command in ubuntu wsl. Otherwise, just install docker desktop and run that command without sudo in a cmd in the folder thing thing you know)*
 
 ```
-sudo docker build .
+sudo docker build . --progress=plain
 ```
 
 ### Note (`owner_id`)
