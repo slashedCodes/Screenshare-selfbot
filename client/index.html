@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <title>Discord</title>
 </head>
+
 <body>
   <div id="app-mount"></div>
   <script>
@@ -46,13 +48,13 @@
     ! function () {
       if (null != window.WebSocket) {
         var n = function (n) {
-            try {
-              var e = localStorage.getItem(n);
-              return null == e ? null : JSON.parse(e)
-            } catch (n) {
-              return null
-            }
-          },
+          try {
+            var e = localStorage.getItem(n);
+            return null == e ? null : JSON.parse(e)
+          } catch (n) {
+            return null
+          }
+        },
           e = n("token"),
           o = n("gatewayURL");
         if (e && o && !window.__OVERLAY__) {
@@ -83,4 +85,5 @@
   </script>
   <script src="./stream_inject.js"></script>
 </body>
+
 </html>
