@@ -9,6 +9,7 @@ RUN apt-get install -y nodejs
 RUN npm i -g yarn
 
 # Clone Repo
+ADD https://api.github.com/repos/alexfeed1990/Screenshare-selfbot/git/refs/heads version.json
 RUN git clone https://github.com/alexfeed1990/Screenshare-selfbot.git
 WORKDIR Screenshare-selfbot
 RUN yarn install
