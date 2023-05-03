@@ -102,10 +102,12 @@ client.on('messageCreate', msg => {
                 stream.channel_id = voice_channel.id
                 url = content[content.length - 1]
                 
+                /*
                 if (!url || !url.match(magnet_regex)) {
                     msg.react(reject)
                     return
                 }
+                */
                 
                 !stream.in_loading ?
                     msg.channel.send("Please wait...")
