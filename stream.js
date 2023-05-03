@@ -1,6 +1,5 @@
 const webdriver = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
-const Torrent = require('torrent-stream')
 const ytdl = require('ytdl-core')
 
 class Video {
