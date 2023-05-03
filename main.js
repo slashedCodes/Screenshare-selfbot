@@ -8,26 +8,22 @@ let intLoop = null
 let loop = false
 const reject = '❌'
 const accept = '✅'
-const prefix = '.'
+const prefix = '*'
 const client = new Discord.Client()
 const token = process.env.token
 let stream = new Stream(token)
 const url_expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 const url_regex = new RegExp(url_expression)
-const magnet_expression = /magnet: \?xt = urn: btih: [a-zA - Z0 - 9]*/g;
-const magnet_regex = new RegExp(magnet_expression)
-
 
 const helpMessage = `Help\n
-    ${prefix}p \`url\` | Youtube | direct link (without downloading)\n
-    ${prefix}magnet \`magnet url\` (you can use stremio to search for these (with the torrentio addon))\n
-    ${prefix}play | Play video\n
-    ${prefix}pause | Pause video\n
-    ${prefix}duration | Show video duration\n
-    ${prefix}seek | Show current video time\n
-    ${prefix}seek \`sec, +sec, -sec\` | Change video time\n
-    ${prefix}loop | Toggle playing video on loop\n
-    ${prefix}stop | Stop streaming
+    *p \`url\` | Youtube | direct link (without downloading)\n
+    *play | Play video\n
+    *pause | Pause video\n
+    *duration | Show video duration\n
+    *seek | Show current video time\n
+    *seek \`sec, +sec, -sec\` | Change video time\n
+    *loop | Toggle playing video on loop\n
+    *stop | Stop streaming
 `
 
 const notAllowed = msg => {
@@ -46,7 +42,7 @@ client.on('messageCreate', msg => {
         command = content[0].split(prefix)[1]
 
         if (process.env.owner_id && !users.includes(msg.author.id) && msg.author.id != process.env.owner_id) return
-        const voice_channel = msg.member.voice.channel
+
         switch (command) {
             case 'p':
                 if (stream.in_progress && notAllowed(msg)) {
@@ -54,6 +50,7 @@ client.on('messageCreate', msg => {
                     return
                 }
 
+                const voice_channel = msg.member.voice.channel
                 if (!voice_channel) {
                     msg.reply("You need to be in a voice channel to use this command")
                     return
@@ -84,38 +81,6 @@ client.on('messageCreate', msg => {
                 notAllowed(msg) ?
                     msg.react(reject) :
                     stream.play()
-                break;
-            case 'magnet':
-                if (stream.in_progress && notAllowed(msg)) {
-                    msg.reply("Another session is already in progress")
-                    return
-                }
-
-                if (!voice_channel) {
-                    msg.reply("You need to be in a voice channel to use this command")
-                    return
-                }
-
-                stream.in_progress = true
-                stream.owner = msg.author.id
-                stream.guild_id = msg.guild.id
-                stream.channel_id = voice_channel.id
-                url = content[content.length - 1]
-                
-                /*
-                if (!url || !url.match(magnet_regex)) {
-                    msg.react(reject)
-                    return
-                }
-                */
-                
-                !stream.in_loading ?
-                    msg.channel.send("Please wait...")
-                        .then(msg => {
-                            stream.torrentLoad(url, msg)
-                        }) :
-                    msg.reply("Another video loading is already in progress, Try again later.")
-                
                 break;
             case 'pause':
                 notAllowed(msg) ?

@@ -1,6 +1,6 @@
 const webdriver = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
-const { WebTorrent } = require('webtorrent')
+const Torrent = require('torrent-stream')
 const ytdl = require('ytdl-core')
 
 class Video {
@@ -103,7 +103,7 @@ class Video {
         const client = new WebTorrent()
 
         client.add(url, function (torrent) {
-            const video_expression = /(?:^.*\.(mp4|mov|avi|mkv|flv)$)/gm;
+            const video_expression = /(?i:^.*\.(mp4|mov|avi|mkv|flv)$)/gm;
             const video_regex = new RegExp(video_expression)
             // Torrents can contain many files. Let's use the .mp4 file
             const file = torrent.files.find(function (file) {
